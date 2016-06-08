@@ -1,0 +1,17 @@
+﻿@model firstMVC.Models.MusicDetails;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+<ul>
+   
+    @foreach (var row in ViewBag.getAllMusicTypes.Rows)
+    {
+    @row["GenreId"];
+        @row["name"];
+
+    }
+</ul>
+
