@@ -24,14 +24,10 @@ namespace firstMVC.Models
             return SqlHelper.ExecuteDataset(connectionString, CommandType.Text, strSql).Tables[0];
         }
 
-        public IEnumerable<MusicDetails> getAllMusicTypesList()
+        public IEnumerable<MusicDetails> setDataInMusicDetailModel()
         {
             string strSql = "select * from Genre";
-            return ConvertToTankReadings(SqlHelper.ExecuteDataset(connectionString, CommandType.Text, strSql).Tables[0]);
-        }
-
-        private IEnumerable<MusicDetails> ConvertToTankReadings(DataTable dataTable)
-        {
+            DataTable dataTable = SqlHelper.ExecuteDataset(connectionString, CommandType.Text, strSql).Tables[0];
             foreach (DataRow row in dataTable.Rows)
             {
                 yield return new MusicDetails
@@ -42,5 +38,24 @@ namespace firstMVC.Models
                 };
             }
         }
+
+        //public IEnumerable<Album> setDataInAlbumModel()
+        //{
+        //    string strSql = "select * from Album";
+        //    DataTable dataTable = SqlHelper.ExecuteDataset(connectionString, CommandType.Text, strSql).Tables[0];
+        //    foreach (DataRow row in dataTable.Rows)
+        //    {
+        //        yield return new Album
+        //        {
+        //            AlbumId = Convert.ToInt32(row["AlbumId"]),
+        //            GenreId = Convert.ToInt32(row["GenreId"]),
+        //            ArtistId = Convert.ToInt32(row["ArtistId"]),
+        //            Title = Convert.ToString(row["Title"]),
+        //            Price = Convert.ToString(row["Price"]),
+        //            AlbumArtUrl = Convert.ToString(row["AlbumArtUrl"])
+        //        };
+        //    }
+        //}
+
     }
 }

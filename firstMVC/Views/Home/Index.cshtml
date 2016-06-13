@@ -1,5 +1,4 @@
-﻿@model firstMVC.Models.MusicDetails;
-@{
+﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -9,9 +8,7 @@
    
     @foreach (var row in ViewBag.getAllMusicTypes.Rows)
     {
-    @row["GenreId"];
-        @row["name"];
-
+        <li>@row["GenreId"] @row["name"]</li>
     }
 </ul>
 

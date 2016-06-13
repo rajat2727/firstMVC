@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using firstMVC.Models;
 using System.Data;
+using System.Dynamic;
 
 namespace firstMVC.Controllers
 {
@@ -17,7 +18,7 @@ namespace firstMVC.Controllers
             CodeDB cc = new CodeDB();
             DataTable objDataTable = cc.getAllMusicTypes();
             ViewBag.getAllMusicTypes = objDataTable;
-            return View(cc.getAllMusicTypesList());
+            return View();
 
             //  return Content("This method returns plain texts.");
 
@@ -34,10 +35,20 @@ namespace firstMVC.Controllers
             //        fileDownloadName: "documentation.pdf");
         }
 
+        //public ActionResult getMusic()
+        //{
+        //    CodeDB cc = new CodeDB();
+        //    return View(cc.setDataInMusicDetailModel());
+        //}
+
         public ActionResult getMusic()
         {
             CodeDB cc = new CodeDB();
-            return View(cc.getAllMusicTypesList());
+            MvcMusicStoreEntities musicDB = new MvcMusicStoreEntities();
+            dynamic model = new ExpandoObject();
+            model.Genres = musicDB.Genres.ToList();
+            model.Albums = musicDB.Albums.ToList(); 
+            return View(model);
         }
         //public ActionResult Index()
         //{
